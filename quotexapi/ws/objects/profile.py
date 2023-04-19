@@ -1,4 +1,4 @@
-from quotexapi.ws.objects.base import Base
+from pyquotex.quotexapi.ws.objects.base import Base
 
 
 class Profile(Base):

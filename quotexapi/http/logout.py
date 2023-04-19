@@ -1,6 +1,6 @@
 """Module for Quotex http login resource."""
 
-from quotexapi.http.navigator import Browser
+from pyquotex.quotexapi.http.navigator import Browser
 
 
 class Logout(Browser):

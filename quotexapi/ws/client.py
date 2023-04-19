@@ -6,8 +6,8 @@ import logging
 import time
 
 import websocket
-from quotexapi import global_value
-from quotexapi.http.user_agents import agents
+from pyquotex.quotexapi import global_value
+from pyquotex.quotexapi.http.user_agents import agents
 
 user_agent_list = agents.split("\n")
 
@@ -18,7 +18,7 @@ class WebsocketClient(object):
     def __init__(self, api):
         """
         :param api: The instance of :class:`QuotexAPI
-            <quotexapi.api.QuotexAPI>`.
+            <pyquotex.quotexapi.api.QuotexAPI>`.
         :trace_ws: Enables and disable `enableTrace` in WebSocket Client.
         """
         self.api = api
