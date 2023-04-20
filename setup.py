@@ -6,7 +6,6 @@ setup(
     version='1.0',
     packages=find_packages(),
     install_requires=[
-        "python==3.10.6",
         "appdirs==1.4.4",
         "beautifulsoup4==4.11.2",
         "certifi==2022.12.7",
