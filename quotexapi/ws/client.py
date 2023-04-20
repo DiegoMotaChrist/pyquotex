@@ -19,7 +19,7 @@ class WebsocketClient(object):
     def __init__(self, api):
         """
         :param api: The instance of :class:`QuotexAPI
-            <pyquotex.quotexapi.api.QuotexAPI>`.
+            <quotexapi.api.QuotexAPI>`.
         :trace_ws: Enables and disable `enableTrace` in WebSocket Client.
         """
         self.api = api

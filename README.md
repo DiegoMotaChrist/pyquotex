@@ -12,7 +12,7 @@ apenas executarem ```sudo apt install openssl```.
 
 ### Install
 ````shell
-git clone https://github.com/cleitonleonel/pyquotex.git
+git clone https://github.com/cleitonleonel/git
 cd pyquotex
 pip install -r requirements.txt
 ````

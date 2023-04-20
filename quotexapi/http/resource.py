@@ -8,7 +8,7 @@ class Resource(object):
     def __init__(self, api):
         """
         :param api: The instance of :class:`QuotexAPI
-            <pyquotex.quotexapi.api.QuotexAPI>`.
+            <quotexapi.api.QuotexAPI>`.
         """
         self.api = api
 

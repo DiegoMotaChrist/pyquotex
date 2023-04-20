@@ -118,7 +118,7 @@ class QuotexAPI(object):
     def logout(self):
         """Property for get Quotex http login resource.
         :returns: The instance of :class:`Login
-            <pyquotex.quotexapi.http.login.Login>`.
+            <quotexapi.http.login.Login>`.
         """
         return Logout(self)
 
@@ -126,7 +126,7 @@ class QuotexAPI(object):
     def login(self):
         """Property for get Quotex http login resource.
         :returns: The instance of :class:`Login
-            <pyquotex.quotexapi.http.login.Login>`.
+            <quotexapi.http.login.Login>`.
         """
         return Login(self)
 
@@ -155,14 +155,14 @@ class QuotexAPI(object):
         """Property for get Quotex websocket candles channel.
 
         :returns: The instance of :class:`GetCandles
-            <pyquotex.quotexapi.ws.channels.candles.GetCandles>`.
+            <quotexapi.ws.channels.candles.GetCandles>`.
         """
         return GetCandles(self)
 
     def check_session(self):
         data = {}
-        if os.path.isfile("./session.json"):
-            with open("./session.json") as file:
+        if os.path.isfile("session.json"):
+            with open("session.json") as file:
                 data = json.loads(file.read())
             self.user_agent = data.get("user_agent")
         return data.get("ssid"), data.get("cookies")
