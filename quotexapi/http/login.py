@@ -47,7 +47,7 @@ class Login(Browser):
             match = re.sub(
                 "window.settings = ", "", script.strip().replace(";", ""))
             self.ssid = json.loads(match).get("token")
-            output_file = Path("./app/session.json")
+            output_file = Path("session.json")
             output_file.parent.mkdir(exist_ok=True, parents=True)
             output_file.write_text(
                 json.dumps({"cookies": self.cookies, "ssid": self.ssid, "user_agent": self.api.user_agent}, indent=4)
