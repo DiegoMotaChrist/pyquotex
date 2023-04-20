@@ -11,15 +11,15 @@ import certifi
 from quotexapi import global_value
 from quotexapi.http.login import Login
 from quotexapi.http.logout import Logout
-from ws.channels.ssid import Ssid
-from ws.channels.buy import Buy
-from ws.channels.candles import GetCandles
-from ws.channels.sell_option import SellOption
-from ws.objects.timesync import TimeSync
-from ws.objects.candles import Candles
-from ws.objects.profile import Profile
-from ws.objects.listinfodata import ListInfoData
-from ws.client import WebsocketClient
+from quotexapi.ws.channels.ssid import Ssid
+from quotexapi.ws.channels.buy import Buy
+from quotexapi.ws.channels.candles import GetCandles
+from quotexapi.ws.channels.sell_option import SellOption
+from quotexapi.ws.objects.timesync import TimeSync
+from quotexapi.ws.objects.candles import Candles
+from quotexapi.ws.objects.profile import Profile
+from quotexapi.ws.objects.listinfodata import ListInfoData
+from quotexapi.ws.client import WebsocketClient
 from collections import defaultdict
 
 
