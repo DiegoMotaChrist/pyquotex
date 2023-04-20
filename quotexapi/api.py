@@ -161,8 +161,8 @@ class QuotexAPI(object):
 
     def check_session(self):
         data = {}
-        if os.path.isfile("session.json"):
-            with open("session.json") as file:
+        if os.path.isfile("./app/session.json"):
+            with open("./app/session.json") as file:
                 data = json.loads(file.read())
             self.user_agent = data.get("user_agent")
         return data.get("ssid"), data.get("cookies")

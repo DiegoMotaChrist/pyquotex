@@ -21,8 +21,8 @@ def login(attempts=2):
             else:
                 print("Erro ao reconectar.")
                 attempt += 1
-                if os.path.isfile("session.json"):
-                    os.remove("session.json")
+                if os.path.isfile("./app/session.json"):
+                    os.remove("./app/session.json")
         elif not check:
             attempt += 1
         else:
