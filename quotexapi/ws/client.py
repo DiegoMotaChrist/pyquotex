@@ -4,6 +4,7 @@ import json
 import random
 import logging
 import time
+from datetime import datetime
 
 import websocket
 from pyquotex.quotexapi import global_value
@@ -59,6 +60,16 @@ class WebsocketClient(object):
                 if "call" in str(message) or 'put' in str(message):
                     self.api.instruments = message
                     # print(message)
+
+                elif message.get("deals"):
+                    for get_m in message["deals"]:
+                        self.api.profit_in_operation = get_m["profit"]
+                        get_m["win"] = True if message["profit"] > 0 else False
+                        get_m["game_state"] = 1
+                        self.api.listinfodata.set(
+                            get_m["win"], get_m["game_state"], get_m["id"]
+                        )
+
                 elif "signals" in str(message):
                     for i in message["signals"]:
                         self.api.signal_data[i[0]][i[2]]["dir"] = i[1][0]["signal"]
@@ -74,14 +85,7 @@ class WebsocketClient(object):
                     self.api.timesync.server_timestamp = message["closeTimestamp"]
                 elif message.get("ticket"):
                     self.api.sold_options_respond = message
-                if message.get("deals"):
-                    for get_m in message["deals"]:
-                        self.api.profit_in_operation = get_m["profit"]
-                        get_m["win"] = True if message["profit"] > 0 else False
-                        get_m["game_state"] = 1
-                        self.api.listinfodata.set(
-                            get_m["win"], get_m["game_state"], get_m["id"]
-                        )
+
                 if message.get("isDemo") and message.get("balance"):
                     self.api.training_balance_edit_request = message
                 elif message.get("error"):

@@ -211,21 +211,27 @@ class Quotex(object):
 
     def check_win(self, id_number):
         """Check win based id"""
-        now_stamp = datetime.fromtimestamp(expiration.get_timestamp())
-        expiration_stamp = datetime.fromtimestamp(self.api.timesync.server_timestamp)
-        remaing_time = int((expiration_stamp - now_stamp).total_seconds())
+        # now_stamp = datetime.fromtimestamp(expiration.get_timestamp())
+        # expiration_stamp = datetime.fromtimestamp(self.api.timesync.server_timestamp)
+        # remaing_time = int((expiration_stamp - now_stamp).total_seconds())
+        # while True:
+            # try:
+        # listinfodata_dict = self.api.listinfodata.get(id_number)
+            #     if listinfodata_dict["game_state"] == 1:
+            #         break
+            # except:
+            #     pass
+            # remaing_time -= 1
+            # time.sleep(1)
+            # print(f"\rRestando {remaing_time if remaing_time > 0 else 0} segundos ...", end="")
+        # self.api.listinfodata.delete(id_number)
+        # return listinfodata_dict["win"]
+
         while True:
             try:
-                listinfodata_dict = self.api.listinfodata.get(id_number)
-                if listinfodata_dict["game_state"] == 1:
-                    break
+                return self.api.listinfodata.get(id_number)["win"]
             except:
                 pass
-            remaing_time -= 1
-            time.sleep(1)
-            print(f"\rRestando {remaing_time if remaing_time > 0 else 0} segundos ...", end="")
-        self.api.listinfodata.delete(id_number)
-        return listinfodata_dict["win"]
 
     def start_candles_stream(self, asset, size, period=0):
         self.api.subscribe_realtime_candle(asset, size, period)
