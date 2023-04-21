@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 from typing import Tuple, Any
 from quotexapi.utils.playwright_install import install
 from playwright.async_api import Playwright, async_playwright, expect
+from quotexapi import global_value
 
 
 async def run(username, password, playwright: Playwright) -> Tuple[Any, str]:
@@ -29,13 +30,14 @@ async def run(username, password, playwright: Playwright) -> Tuple[Any, str]:
     match = re.sub(
         "window.settings = ", "", script.strip().replace(";", ""))
     ssid = json.loads(match).get("token")
-    output_file = Path("session.json")
-    output_file.parent.mkdir(exist_ok=True, parents=True)
+    # output_file = Path("session.json")
+    # output_file.parent.mkdir(exist_ok=True, parents=True)
     cookiejar = requests.utils.cookiejar_from_dict({c['name']: c['value'] for c in cookies})
     cookie_string = '; '.join([f'{c.name}={c.value}' for c in cookiejar])
-    output_file.write_text(
-        json.dumps({"cookies": cookie_string, "ssid": ssid, "user_agent": user_agent}, indent=4)
-    )
+    # output_file.write_text(
+    #     json.dumps({"cookies": cookie_string, "ssid": ssid, "user_agent": user_agent}, indent=4)
+    # )
+    global_value.session = {"cookies": cookie_string, "ssid": ssid, "user_agent": user_agent}
     await context.close()
     await browser.close()
 

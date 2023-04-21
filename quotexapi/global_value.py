@@ -11,3 +11,4 @@ check_accepted_connection = False
 check_websocket_if_error = False
 websocket_error_reason = None
 balance_id = None
+session = None
