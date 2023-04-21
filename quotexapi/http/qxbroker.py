@@ -5,9 +5,9 @@ import requests
 from pathlib import Path
 from bs4 import BeautifulSoup
 from typing import Tuple, Any
-from pyquotex.quotexapi.utils.playwright_install import install
+from quotexapi.utils.playwright_install import install
 from playwright.async_api import Playwright, async_playwright, expect
-from pyquotex.quotexapi import global_value
+from quotexapi import global_value
 
 
 async def run(username, password, playwright: Playwright) -> Tuple[Any, str]:

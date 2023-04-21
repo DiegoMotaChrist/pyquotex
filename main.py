@@ -1,6 +1,6 @@
 import os
 import time
-from pyquotex.quotexapi.stable_api import Quotex
+from quotexapi.stable_api import Quotex
 
 # browser=True enable playwright
 client = Quotex(email="email@gmail.com", password="senha", browser=False)
