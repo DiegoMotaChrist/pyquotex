@@ -8,18 +8,18 @@ import threading
 import collections
 import urllib3
 import certifi
-from quotexapi import global_value
-from quotexapi.http.login import Login
-from quotexapi.http.logout import Logout
-from quotexapi.ws.channels.ssid import Ssid
-from quotexapi.ws.channels.buy import Buy
-from quotexapi.ws.channels.candles import GetCandles
-from quotexapi.ws.channels.sell_option import SellOption
-from quotexapi.ws.objects.timesync import TimeSync
-from quotexapi.ws.objects.candles import Candles
-from quotexapi.ws.objects.profile import Profile
-from quotexapi.ws.objects.listinfodata import ListInfoData
-from quotexapi.ws.client import WebsocketClient
+from pyquotex.quotexapi import global_value
+from pyquotex.quotexapi.http.login import Login
+from pyquotex.quotexapi.http.logout import Logout
+from pyquotex.quotexapi.ws.channels.ssid import Ssid
+from pyquotex.quotexapi.ws.channels.buy import Buy
+from pyquotex.quotexapi.ws.channels.candles import GetCandles
+from pyquotex.quotexapi.ws.channels.sell_option import SellOption
+from pyquotex.quotexapi.ws.objects.timesync import TimeSync
+from pyquotex.quotexapi.ws.objects.candles import Candles
+from pyquotex.quotexapi.ws.objects.profile import Profile
+from pyquotex.quotexapi.ws.objects.listinfodata import ListInfoData
+from pyquotex.quotexapi.ws.client import WebsocketClient
 from collections import defaultdict
 
 
@@ -161,15 +161,15 @@ class QuotexAPI(object):
 
     def check_session(self):
         data = {}
-        # if os.path.isfile("session.json"):
-        #     with open("session.json") as file:
-        #         data = json.loads(file.read())
-        #     self.user_agent = data.get("user_agent")
-        # return data.get("ssid"), data.get("cookies")
-        if global_value.session:
-            data = global_value.session
+        if os.path.isfile("session.json"):
+            with open("session.json") as file:
+                data = json.loads(file.read())
             self.user_agent = data.get("user_agent")
         return data.get("ssid"), data.get("cookies")
+        # if global_value.session:
+        #     data = global_value.session
+        #     self.user_agent = data.get("user_agent")
+        # return data.get("ssid"), data.get("cookies")
 
     def send_websocket_request(self, data, no_force_send=True):
         """Send websocket request to Quotex server.

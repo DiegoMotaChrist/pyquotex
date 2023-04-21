@@ -7,8 +7,8 @@ import time
 from datetime import datetime
 
 import websocket
-from quotexapi import global_value
-from quotexapi.http.user_agents import agents
+from pyquotex.quotexapi import global_value
+from pyquotex.quotexapi.http.user_agents import agents
 
 user_agent_list = agents.split("\n")
 
@@ -45,9 +45,9 @@ class WebsocketClient(object):
             logger = logging.getLogger(__name__)
             message = message
             if "authorization/reject" in str(message):
-                # if os.path.isfile("session.json"):
-                #     os.remove("session.json")
-                global_value.session = None
+                if os.path.isfile("session.json"):
+                    os.remove("session.json")
+                # global_value.session = None
                 global_value.SSID = None
                 global_value.check_rejected_connection = 1
             elif "s_authorization" in str(message):

@@ -1,6 +1,6 @@
 import json
-from quotexapi.ws.channels.base import Base
-from quotexapi.expiration import get_expiration_time
+from pyquotex.quotexapi.ws.channels.base import Base
+from pyquotex.quotexapi.expiration import get_expiration_time
 
 
 class Buy(Base):

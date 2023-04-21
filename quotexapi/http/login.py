@@ -1,9 +1,9 @@
 import re
 import json
 from pathlib import Path
-from quotexapi.http.qxbroker import authorize
-from quotexapi.http.navigator import Browser
-from quotexapi import global_value
+from pyquotex.quotexapi.http.qxbroker import authorize
+from pyquotex.quotexapi.http.navigator import Browser
+from pyquotex.quotexapi import global_value
 
 
 class Login(Browser):
@@ -48,12 +48,12 @@ class Login(Browser):
             match = re.sub(
                 "window.settings = ", "", script.strip().replace(";", ""))
             self.ssid = json.loads(match).get("token")
-            # output_file = Path("session.json")
-            # output_file.parent.mkdir(exist_ok=True, parents=True)
-            # output_file.write_text(
-            #     json.dumps({"cookies": self.cookies, "ssid": self.ssid, "user_agent": self.api.user_agent}, indent=4)
-            # )
-            global_value.session = {"cookies": self.cookies, "ssid": self.ssid, "user_agent": self.api.user_agent}
+            output_file = Path("session.json")
+            output_file.parent.mkdir(exist_ok=True, parents=True)
+            output_file.write_text(
+                json.dumps({"cookies": self.cookies, "ssid": self.ssid, "user_agent": self.api.user_agent}, indent=4)
+            )
+            # global_value.session = {"cookies": self.cookies, "ssid": self.ssid, "user_agent": self.api.user_agent}
             return self.response, json.loads(match)
         return None, None
 
