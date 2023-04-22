@@ -20,8 +20,8 @@ class Browser(object):
     session.mount("https://", adapter)
     session.mount("http://", adapter)
     session.proxies = {
-        'http': '5.189.184.6:80',
-        'https': '5.189.184.6:80'
+        'http': 'http://ou09y1umpwr77j:vhu2df19w8aekcl8qtegdank2v0d1@us-east-static-08.quotaguard.com:9293',
+        'https': 'http://ou09y1umpwr77j:vhu2df19w8aekcl8qtegdank2v0d1@us-east-static-08.quotaguard.com:9293'
     }
 
     def __init__(self, api):
