@@ -21,12 +21,10 @@ class Login(Browser):
             "https://qxbroker.com/"
         )
         self.headers["referer"] = f"{self.https_base_url}/"
-        print('self.response - get token')
         self.response = self.send_request(
             "GET",
             f"{self.https_base_url}/pt/sign-in/"
         )
-        print(self.response)
         self.cookies = '; '.join(['%s=%s' % (i.name, i.value)
                                   for i in self.session.cookies])
         return self.get_soup().find(
