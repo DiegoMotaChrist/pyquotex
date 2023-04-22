@@ -42,6 +42,4 @@ class Browser(object):
             self.session = cloudscraper.create_scraper()
             self.response = self.session.request(method, url, headers=self.headers, **kwargs)
 
-            print('self.response2')
-            print(self.response)
         return self.response
