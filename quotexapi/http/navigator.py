@@ -15,6 +15,10 @@ retry_strategy = Retry(
 adapter = HTTPAdapter(max_retries=retry_strategy)
 user_agent_list = agents.split("\n")
 
+proxies = {
+    'http': '5.189.184.6:80',
+    'https': '5.189.184.6:80'
+}
 
 class Browser(object):
     session = requests.Session()
@@ -39,7 +43,7 @@ class Browser(object):
     def send_request(self, method, url, **kwargs):
         self.response = self.session.request(method, url, headers=self.headers, **kwargs)
         if not self.response:
-            self.session = cloudscraper.create_scraper()
+            self.session = cloudscraper.create_scraper(proxies = proxies)
             self.response = self.session.request(method, url, headers=self.headers, **kwargs)
 
         return self.response
