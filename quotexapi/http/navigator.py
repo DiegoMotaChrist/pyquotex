@@ -16,12 +16,13 @@ adapter = HTTPAdapter(max_retries=retry_strategy)
 user_agent_list = agents.split("\n")
 
 class Browser(object):
+    proxy_url = 'http://ou09y1umpwr77j:vhu2df19w8aekcl8qtegdank2v0d1@us-east-static-08.quotaguard.com:9293'
     session = requests.Session()
     session.mount("https://", adapter)
     session.mount("http://", adapter)
     session.proxies = {
-        'http': 'http://ou09y1umpwr77j:vhu2df19w8aekcl8qtegdank2v0d1@us-east-static-08.quotaguard.com:9293',
-        'https': 'http://ou09y1umpwr77j:vhu2df19w8aekcl8qtegdank2v0d1@us-east-static-08.quotaguard.com:9293'
+        'http': proxy_url,
+        'https': proxy_url
     }
 
     def __init__(self, api):
@@ -42,7 +43,7 @@ class Browser(object):
     def send_request(self, method, url, **kwargs):
         self.response = self.session.request(method, url, headers=self.headers, **kwargs)
         if not self.response:
-            proxy_url = '5.189.184.6:80'
+            proxy_url = 'http://ou09y1umpwr77j:vhu2df19w8aekcl8qtegdank2v0d1@us-east-static-08.quotaguard.com:9293'
             self.session = cloudscraper.create_scraper(
                 browser={
                     'proxy': {
