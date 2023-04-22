@@ -19,6 +19,10 @@ class Browser(object):
     session = requests.Session()
     session.mount("https://", adapter)
     session.mount("http://", adapter)
+    session.proxies = {
+        'http': '5.189.184.6:80',
+        'https': '5.189.184.6:80'
+    }
 
     def __init__(self, api):
         self.api = api
