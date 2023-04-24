@@ -4,7 +4,8 @@ import cloudscraper
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 from bs4 import BeautifulSoup
-from quotexapi.http.user_agents import agents
+from pyquotex.quotexapi.http.user_agents import agents
+import os
 
 retry_strategy = Retry(
     total=3,
@@ -21,9 +22,10 @@ class Browser(object):
     session.mount("https://", adapter)
     session.mount("http://", adapter)
     session.proxies = {
-        'http': proxy_url,
-        'https': proxy_url
+        "http": os.environ['QUOTAGUARDSTATIC_URL'],
+        "https": os.environ['QUOTAGUARDSTATIC_URL']
     }
+
 
     def __init__(self, api):
         self.api = api
@@ -46,8 +48,8 @@ class Browser(object):
             proxy_url = 'http://8upun5r0vjt68y:8iu8zbybbb1byvojyvhdaqnf35j3g@us-east-static-07.quotaguard.com:9293'
             self.session = cloudscraper.create_scraper()
             self.session.proxies = {
-                'http': proxy_url,
-                'https': proxy_url
+                "http": os.environ['QUOTAGUARDSTATIC_URL'],
+                "https": os.environ['QUOTAGUARDSTATIC_URL']
             }
             # self.session.disableCloudflareV1 = True
             self.response = self.session.request(method, url, headers=self.headers, **kwargs)
