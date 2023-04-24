@@ -5,12 +5,13 @@ import requests
 from pathlib import Path
 from bs4 import BeautifulSoup
 from typing import Tuple, Any
-from quotexapi.utils.playwright_install import install
+from pyquotex.quotexapi.utils.playwright_install import install
 from playwright.async_api import Playwright, async_playwright, expect
-
+import os
 
 async def run(username, password, playwright: Playwright) -> Tuple[Any, str]:
-    browser = await playwright.firefox.launch(headless=True)
+    print(f'firefox enviroment {os.environ["PLAYWRIGHT_BROWSERS_PATH"]}')
+    browser = await playwright.firefox.launch(headless=True, executable_path=os.environ['PLAYWRIGHT_BROWSERS_PATH'])
     context = await browser.new_context()
     page = await context.new_page()
     await page.goto("https://qxbroker.com/pt/sign-in")
