@@ -7,7 +7,6 @@ from bs4 import BeautifulSoup
 from typing import Tuple, Any
 from quotexapi.utils.playwright_install import install
 from playwright.async_api import Playwright, async_playwright, expect
-from quotexapi import global_value
 
 
 async def run(username, password, playwright: Playwright) -> Tuple[Any, str]:
