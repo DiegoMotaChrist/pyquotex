@@ -10,8 +10,7 @@ from playwright.async_api import Playwright, async_playwright, expect
 import os
 
 async def run(username, password, playwright: Playwright) -> Tuple[Any, str]:
-    print(f'firefox enviroment {os.environ["PLAYWRIGHT_BROWSERS_PATH"]}')
-    browser = await playwright.firefox.launch(headless=True, executable_path=os.environ['PLAYWRIGHT_BROWSERS_PATH'])
+    browser = await playwright.firefox.launch(headless=True)
     context = await browser.new_context()
     page = await context.new_page()
     await page.goto("https://qxbroker.com/pt/sign-in")
