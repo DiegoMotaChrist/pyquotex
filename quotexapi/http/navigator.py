@@ -20,11 +20,10 @@ class Browser(object):
     session = requests.Session()
     session.mount("https://", adapter)
     session.mount("http://", adapter)
-    session.proxies.update({
-        "http": os.environ['QUOTAGUARDSTATIC_URL'],
-        "https": os.environ['QUOTAGUARDSTATIC_URL']
-    })
-
+    # session.proxies.update({
+    #     "http": os.environ['QUOTAGUARDSTATIC_URL'],
+    #     "https": os.environ['QUOTAGUARDSTATIC_URL']
+    # })
 
     def __init__(self, api):
         self.api = api
@@ -43,13 +42,12 @@ class Browser(object):
 
     def send_request(self, method, url, **kwargs):
         self.response = self.session.request(method, url, headers=self.headers, **kwargs)
-        print(f'line 46: {self.session.proxies}')
         if not self.response:
             self.session = cloudscraper.create_scraper()
-            self.session.proxies.update({
-                "http": os.environ['QUOTAGUARDSTATIC_URL'],
-                "https": os.environ['QUOTAGUARDSTATIC_URL']
-            })
+            # self.session.proxies.update({
+            #     "http": os.environ['QUOTAGUARDSTATIC_URL'],
+            #     "https": os.environ['QUOTAGUARDSTATIC_URL']
+            # })
             print(f'line 53: {self.session.proxies}')
             # self.session.disableCloudflareV1 = True
             self.response = self.session.request(method, url, headers=self.headers, **kwargs)
