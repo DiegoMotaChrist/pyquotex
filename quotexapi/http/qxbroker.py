@@ -5,7 +5,7 @@ import requests
 from pathlib import Path
 from bs4 import BeautifulSoup
 from typing import Tuple, Any
-from quotexapi.utils.playwright_install import install
+from pyquotex.quotexapi.utils.playwright_install import install
 from playwright.async_api import Playwright, async_playwright, expect
 import os
 

@@ -19,7 +19,7 @@ pip install -r requirements.txt
 
 ### Import
 ```python
-from quotexapi.stable_api import Quotex
+from pyquotex.quotexapi.stable_api import Quotex
 ```
 
 ### Login by email and password
@@ -27,7 +27,7 @@ if connect sucess return True,None
 
 if connect fail return False,None  
 ```python
-from quotexapi.stable_api import Quotex
+from pyquotex.quotexapi.stable_api import Quotex
 
 client = Quotex(email="user@gmail.com", password="pwd")
 client.debug_ws_enable = False
@@ -37,7 +37,7 @@ print(check_connect, message)
 ### Check_win & buy sample
 
 ```python
-from quotexapi.stable_api import Quotex
+from pyquotex.quotexapi.stable_api import Quotex
 
 client = Quotex(email="user@gmail.com", password="pwd")
 client.debug_ws_enable = False
