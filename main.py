@@ -1,6 +1,6 @@
 import os
 import time
-from quotexapi.stable_api import Quotex
+from pyquotex.quotexapi.stable_api import Quotex
 import asyncio
 
 # browser=True enable playwright

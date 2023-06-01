@@ -6,8 +6,8 @@ import logging
 import time
 
 import websocket
-from quotexapi import global_value
-from quotexapi.http.user_agents import agents
+from pyquotex.quotexapi import global_value
+from pyquotex.quotexapi.http.user_agents import agents
 
 user_agent_list = agents.split("\n")
 
