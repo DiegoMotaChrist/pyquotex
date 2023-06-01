@@ -3,10 +3,10 @@ import time
 import math
 import logging
 from datetime import datetime
-from pyquotex.quotexapi import expiration
-from pyquotex.quotexapi import global_value
-from pyquotex.quotexapi.api import QuotexAPI
-from pyquotex.quotexapi.constants import codes_asset
+from quotexapi import expiration
+from quotexapi import global_value
+from quotexapi.api import QuotexAPI
+from quotexapi.constants import codes_asset
 from collections import defaultdict
 
 

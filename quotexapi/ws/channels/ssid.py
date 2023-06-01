@@ -1,5 +1,5 @@
 import json
-from pyquotex.quotexapi.ws.channels.base import Base
+from quotexapi.ws.channels.base import Base
 
 
 class Ssid(Base):

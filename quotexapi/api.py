@@ -8,18 +8,18 @@ import threading
 import collections
 import urllib3
 import certifi
-from pyquotex.quotexapi import global_value
-from pyquotex.quotexapi.http.login import Login
-from pyquotex.quotexapi.http.logout import Logout
-from pyquotex.quotexapi.ws.channels.ssid import Ssid
-from pyquotex.quotexapi.ws.channels.buy import Buy
-from pyquotex.quotexapi.ws.channels.candles import GetCandles
-from pyquotex.quotexapi.ws.channels.sell_option import SellOption
-from pyquotex.quotexapi.ws.objects.timesync import TimeSync
-from pyquotex.quotexapi.ws.objects.candles import Candles
-from pyquotex.quotexapi.ws.objects.profile import Profile
-from pyquotex.quotexapi.ws.objects.listinfodata import ListInfoData
-from pyquotex.quotexapi.ws.client import WebsocketClient
+from quotexapi import global_value
+from quotexapi.http.login import Login
+from quotexapi.http.logout import Logout
+from quotexapi.ws.channels.ssid import Ssid
+from quotexapi.ws.channels.buy import Buy
+from quotexapi.ws.channels.candles import GetCandles
+from quotexapi.ws.channels.sell_option import SellOption
+from quotexapi.ws.objects.timesync import TimeSync
+from quotexapi.ws.objects.candles import Candles
+from quotexapi.ws.objects.profile import Profile
+from quotexapi.ws.objects.listinfodata import ListInfoData
+from quotexapi.ws.client import WebsocketClient
 from collections import defaultdict
 
 
