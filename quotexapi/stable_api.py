@@ -129,7 +129,7 @@ class Quotex(object):
             time.sleep(1)
         return self.api.candle_v2_data[asset]
 
-    def connect(self):
+    async def connect(self):
         if global_value.check_websocket_if_connect:
             self.close()
         self.api = QuotexAPI(
@@ -139,11 +139,11 @@ class Quotex(object):
             browser=self.browser,
         )
         self.api.trace_ws = self.debug_ws_enable
-        check, reason = self.api.connect()
+        check, reason = await self.api.connect()
         if check:
             self.api.send_ssid()
             if global_value.check_accepted_connection == 0:
-                check, reason = self.connect()
+                check, reason = await self.connect()
                 if not check:
                     check, reason = False, "Acesso negado, sessão não existe!!!"
         return check, reason
@@ -185,7 +185,7 @@ class Quotex(object):
             if count == 10:
                 break
             count += 1
-            time.sleep(0.1)
+            time.sleep(1)
         else:
             status_buy = True
         return status_buy, self.api.buy_successful
@@ -214,24 +214,19 @@ class Quotex(object):
         # now_stamp = datetime.fromtimestamp(expiration.get_timestamp())
         # expiration_stamp = datetime.fromtimestamp(self.api.timesync.server_timestamp)
         # remaing_time = int((expiration_stamp - now_stamp).total_seconds())
-        # while True:
-            # try:
-        # listinfodata_dict = self.api.listinfodata.get(id_number)
-            #     if listinfodata_dict["game_state"] == 1:
-            #         break
-            # except:
-            #     pass
-            # remaing_time -= 1
-            # time.sleep(1)
-            # print(f"\rRestando {remaing_time if remaing_time > 0 else 0} segundos ...", end="")
-        # self.api.listinfodata.delete(id_number)
-        # return listinfodata_dict["win"]
-
         while True:
             try:
-                return self.api.listinfodata.get(id_number)["win"]
+                listinfodata_dict = self.api.listinfodata.get(id_number)
+                if listinfodata_dict["game_state"] == 1:
+                    break
             except:
                 pass
+            # remaing_time -= 1
+            # time.sleep(1)
+            # print(f"\rRestando {remaing_time} segundos ...", end="")
+        self.api.listinfodata.delete(id_number)
+        # return listinfodata_dict["win"]
+        return listinfodata_dict["win"]
 
     def start_candles_stream(self, asset, size, period=0):
         self.api.subscribe_realtime_candle(asset, size, period)

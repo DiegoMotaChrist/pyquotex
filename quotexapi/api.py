@@ -176,16 +176,16 @@ class QuotexAPI(object):
         :param str data: The websocket request data.
         :param bool no_force_send: Default None.
         """
-        while (global_value.ssl_Mutual_exclusion or global_value.ssl_Mutual_exclusion_write) and no_force_send:
-            pass
+        # while (global_value.ssl_Mutual_exclusion or global_value.ssl_Mutual_exclusion_write) and no_force_send:
+        #     pass
         global_value.ssl_Mutual_exclusion_write = True
-        self.websocket.send('42["tick"]')
-        self.websocket.send('42["indicator/list"]')
-        self.websocket.send('42["drawing/load"]')
-        self.websocket.send('42["pending/list"]')
-        self.websocket.send('42["instruments/update",{"asset":"%s","period":60}]' % self.current_asset)
-        self.websocket.send('42["chart_notification/get"]')
-        self.websocket.send('42["depth/follow","%s"]' % self.current_asset)
+        # self.websocket.send('42["tick"]')
+        # self.websocket.send('42["indicator/list"]')
+        # self.websocket.send('42["drawing/load"]')
+        # self.websocket.send('42["pending/list"]')
+        # self.websocket.send('42["instruments/update",{"asset":"%s","period":60}]' % self.current_asset)
+        # self.websocket.send('42["chart_notification/get"]')
+        # self.websocket.send('42["depth/follow","%s"]' % self.current_asset)
         self.websocket.send(data)
         logger.debug(data)
         global_value.ssl_Mutual_exclusion_write = False
@@ -194,12 +194,12 @@ class QuotexAPI(object):
         data = f'42["demo/refill",{json.dumps(amount)}]'
         self.send_websocket_request(data)
 
-    def get_ssid(self):
+    async def get_ssid(self):
         ssid, cookies = self.check_session()
         if not ssid:
             # try:
             print("Autenticando usuário...")
-            ssid, cookies = self.login(
+            ssid, cookies = await self.login(
                 self.username,
                 self.password,
                 self.browser,
@@ -238,6 +238,7 @@ class QuotexAPI(object):
                 if global_value.check_websocket_if_error:
                     return False, global_value.websocket_error_reason
                 elif global_value.check_websocket_if_connect == 0:
+                    print("Websocket conexão fechada.")
                     logger.debug("Websocket conexão fechada.")
                     return False, "Websocket conexão fechada."
                 elif global_value.check_websocket_if_connect == 1:
@@ -257,14 +258,13 @@ class QuotexAPI(object):
             return False
         return True
 
-    def connect(self):
+    async def connect(self):
         """Method for connection to Quotex API."""
         global_value.ssl_Mutual_exclusion = False
         global_value.ssl_Mutual_exclusion_write = False
         if global_value.check_websocket_if_connect:
             self.close()
-        ssid, self.cookies = self.get_ssid()
-        print(ssid)
+        ssid, self.cookies = await self.get_ssid()
         check_websocket, websocket_reason = self.start_websocket()
         if not check_websocket:
             return check_websocket, websocket_reason

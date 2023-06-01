@@ -75,14 +75,14 @@ class Login(Browser):
         result_data = self.get_profile()
         return result_data
 
-    def __call__(self, username, password, browser):
+    async def __call__(self, username, password, browser):
         """Method to get Quotex API login http request.
         :param str username: The username of a Quotex server.
         :param str password: The password of a Quotex server.
         :returns: The instance of :class:`requests.Response`.
         """
         if browser:
-            self.ssid, self.cookies = authorize(username, password)
+            self.ssid, self.cookies = await authorize(username, password)
         else:
             data = {
                 "_token": self.get_token(),

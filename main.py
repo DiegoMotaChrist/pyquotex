@@ -1,20 +1,21 @@
 import os
 import time
 from pyquotex.quotexapi.stable_api import Quotex
+import asyncio
 
 # browser=True enable playwright
-client = Quotex(email="email@gmail.com", password="senha", browser=False)
+client = Quotex(email="diego.christ@outlook.com", password="@D1i2e3g4o5@Quotex", browser=False)
 client.debug_ws_enable = False
 
 
-def login(attempts=2):
-    check, reason = client.connect()
+async def login(attempts=2):
+    check, reason = await client.connect()
     print("Start your robot")
     attempt = 1
     while attempt < attempts:
         if not client.check_connect():
             print(f"Tentando reconectar, tentativa {attempt} de {attempts}")
-            check, reason = client.connect()
+            check, reason = await client.connect()
             if check:
                 print("Reconectado com sucesso!!!")
                 break
@@ -66,16 +67,16 @@ def buy():
     client.close()
 
 
-def buy_and_check_win():
-    check_connect, message = login()
+async def buy_and_check_win():
+    check_connect, message = await login()
     print(check_connect, message)
     if check_connect:
         client.change_account("PRACTICE")
         print("Saldo corrente: ", client.get_balance())
-        amount = 1500
-        asset = "AUDCAD_otc"  # "EURUSD_otc"
+        amount = 10
+        asset = "USDBRL_otc"  # "EURUSD_otc"
         direction = "call"
-        duration = 30  # in seconds
+        duration = 5  # in seconds
         status, buy_info = client.buy(amount, asset, direction, duration)
         # print(status, buy_info)
         if status:
@@ -97,7 +98,7 @@ def sell_option():
     if check_connect:
         client.change_account("PRACTICE")
         amount = 30
-        asset = "EURUSD_otc"  # "EURUSD_otc"
+        asset = "CADCHF_otc"  # "EURUSD_otc"
         direction = "put"
         duration = 1000  # in seconds
         status, buy_info = client.buy(amount, asset, direction, duration)
@@ -173,11 +174,11 @@ def get_signal_data():
 
 
 # get_signal_data()
-get_balance()
+# get_balance()
 # get_payment()
 # get_candle()
 # get_candle_v2()
 # get_realtime_candle()
 # asset_open()
-# buy_and_check_win()
+asyncio.run(buy_and_check_win())
 # balance_refill()

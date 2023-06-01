@@ -49,5 +49,5 @@ async def main(username, password) -> Tuple[Any, str]:
         return await run(username, password, playwright)
 
 
-def authorize(username, password):
-    return asyncio.run(main(username, password))
+async def authorize(username, password):
+    return await main(username, password)
