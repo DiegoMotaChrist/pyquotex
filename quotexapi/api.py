@@ -251,9 +251,12 @@ class QuotexAPI(object):
     def send_ssid(self):
         self.profile.msg = None
         self.ssid(global_value.SSID)
+        count = 0
         while not self.profile.msg:
             time.sleep(0.1)
-            pass
+            count += 1
+            if count == 50: 
+                raise Exception(f"O envio de authorization com o SSID {global_value.SSID} não retornou resultados")
         if not self.profile.msg:
             return False
         return True
