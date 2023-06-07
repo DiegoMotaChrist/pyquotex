@@ -33,6 +33,7 @@ class WebsocketClient(object):
             on_error=self.on_error,
             on_close=self.on_close,
             on_open=self.on_open,
+            on_pong=self.on_pong,
             header=self.headers,
             cookie=self.api.cookies
         )
@@ -124,3 +125,8 @@ class WebsocketClient(object):
         logger = logging.getLogger(__name__)
         logger.debug("Websocket connection closed.")
         global_value.check_websocket_if_connect = 0
+
+    @staticmethod
+    def on_pong(wss, a):
+        """Method to process websocket close."""
+        print('PONG!')
