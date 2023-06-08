@@ -129,4 +129,3 @@ class WebsocketClient(object):
     @staticmethod
     def on_pong(wss, a):
         """Method to process websocket close."""
-        print('PONG!')
