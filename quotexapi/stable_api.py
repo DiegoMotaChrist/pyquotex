@@ -180,6 +180,7 @@ class Quotex(object):
         self.duration = duration - 1
         request_id = expiration.get_timestamp()
         self.api.current_asset = asset
+        self.api.buy_id = None
         self.api.buy(price, asset, direction, duration, request_id)
         while not self.api.buy_id:
             if count == 10:
@@ -226,7 +227,7 @@ class Quotex(object):
             # print(f"\rRestando {remaing_time} segundos ...", end="")
         self.api.listinfodata.delete(id_number)
         # return listinfodata_dict["win"]
-        return listinfodata_dict["win"]
+        return listinfodata_dict
 
     def start_candles_stream(self, asset, size, period=0):
         self.api.subscribe_realtime_candle(asset, size, period)

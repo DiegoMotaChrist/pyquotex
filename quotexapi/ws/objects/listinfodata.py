@@ -11,8 +11,8 @@ class ListInfoData(Base):
         self.__name = "listInfoData"
         self.listinfodata_dict = {}
 
-    def set(self, win, game_state, id_number):
-        self.listinfodata_dict[id_number] = {"win": win, "game_state": game_state}
+    def set(self, win, game_state, profit, id_number):
+        self.listinfodata_dict[id_number] = {"win": win, "profit": profit, "game_state": game_state}
 
     def delete(self, id_number):
         del self.listinfodata_dict[id_number]

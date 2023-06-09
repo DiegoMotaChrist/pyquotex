@@ -78,10 +78,10 @@ class WebsocketClient(object):
                 if message.get("deals"):
                     for get_m in message["deals"]:
                         self.api.profit_in_operation = get_m["profit"]
-                        get_m["win"] = True if message["profit"] > 0 else False
+                        get_m["win"] = True if get_m["profit"] > 0 else False
                         get_m["game_state"] = 1
                         self.api.listinfodata.set(
-                            get_m["win"], get_m["game_state"], get_m["id"]
+                            get_m["win"], get_m["game_state"], get_m["profit"], get_m["id"]
                         )
                 if message.get("isDemo") and message.get("balance"):
                     self.api.training_balance_edit_request = message
