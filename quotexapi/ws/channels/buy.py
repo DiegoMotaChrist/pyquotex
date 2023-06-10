@@ -59,7 +59,7 @@ class Buy(Base):
         # data = f'42["orders/open",{json.dumps(payload)}]'
         # self.send_websocket_request(data)
 
-        self.send_websocket_request(f'42["orders/open",{json.dumps({"asset": asset,"amount": price,"time": duration,"action": direction,"isDemo": self.api.account_type,"tournamentId": 0,"requestId": request_id,"optionType": 100})}]')
+        self.send_websocket_request(f'42["orders/open",{json.dumps({"asset": asset,"amount": price,"time": duration,"action": direction,"isDemo": self.api.account_type,"tournamentId": 0,"requestId": request_id,"optionType": 1})}]')
 
 
 """
