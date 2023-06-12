@@ -21,7 +21,7 @@ from pyquotex.quotexapi.ws.objects.profile import Profile
 from pyquotex.quotexapi.ws.objects.listinfodata import ListInfoData
 from pyquotex.quotexapi.ws.client import WebsocketClient
 from collections import defaultdict
-
+from logger import logger
 
 def nested_dict(n, type):
     if n == 1:
@@ -198,13 +198,13 @@ class QuotexAPI(object):
         ssid, cookies = self.check_session()
         if not ssid:
             # try:
-            print("Autenticando usuário...")
+            logger.info("Autenticando usuário...")
             ssid, cookies = await self.login(
                 self.username,
                 self.password,
                 self.browser,
             )
-            print("Login realizado com sucesso!!!")
+            logger.info("Login realizado com sucesso!!!")
             """except Exception as e:
                 logger = logging.getLogger(__name__)
                 logger.error(e)
@@ -237,7 +237,7 @@ class QuotexAPI(object):
                 if global_value.check_websocket_if_error:
                     return False, global_value.websocket_error_reason
                 elif global_value.check_websocket_if_connect == 0:
-                    print("Websocket conexão fechada.")
+                    logger.info("Websocket conexão fechada.")
                     logger.debug("Websocket conexão fechada.")
                     return False, "Websocket conexão fechada."
                 elif global_value.check_websocket_if_connect == 1:

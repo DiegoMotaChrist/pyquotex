@@ -8,6 +8,7 @@ import time
 import websocket
 from pyquotex.quotexapi import global_value
 from pyquotex.quotexapi.http.user_agents import agents
+from logger import logger
 
 user_agent_list = agents.split("\n")
 
@@ -59,7 +60,7 @@ class WebsocketClient(object):
                 self.api.profile.msg = message
                 if "call" in str(message) or 'put' in str(message):
                     self.api.instruments = message
-                    # print(message)
+                    # logger.info(message)
                 elif "signals" in str(message):
                     for i in message["signals"]:
                         self.api.signal_data[i[0]][i[2]]["dir"] = i[1][0]["signal"]
@@ -67,7 +68,7 @@ class WebsocketClient(object):
                 elif message.get("liveBalance") or message.get("demoBalance"):
                     self.api.account_balance = message
                 elif message.get("index"):
-                    # print(message)
+                    # logger.info(message)
                     self.api.candles.candles_data = message
                 elif message.get("id"):
                     self.api.buy_successful = message
@@ -86,7 +87,7 @@ class WebsocketClient(object):
                 if message.get("isDemo") and message.get("balance"):
                     self.api.training_balance_edit_request = message
                 elif message.get("error"):
-                    # print(message)
+                    # logger.info(message)
                     pass
             except:
                 pass

@@ -1,6 +1,6 @@
 import time
 from functools import wraps
-
+from logger import logger
 
 def retry(ExceptionToCheck, tries=4, delay=3, backoff=2, logger=None):
     """Retry calling the decorated function using an exponential backoff.
@@ -35,7 +35,7 @@ def retry(ExceptionToCheck, tries=4, delay=3, backoff=2, logger=None):
                     if logger:
                         logger.warning(msg)
                     else:
-                        print(msg)
+                        logger.info(msg)
                     time.sleep(mdelay)
                     mtries -= 1
                     mdelay *= backoff

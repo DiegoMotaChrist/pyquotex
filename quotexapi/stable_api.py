@@ -225,7 +225,7 @@ class Quotex(object):
                 pass
             # remaing_time -= 1
             # time.sleep(1)
-            # print(f"\rRestando {remaing_time} segundos ...", end="")
+            # logger.info(f"\rRestando {remaing_time} segundos ...", end="")
         self.api.listinfodata.delete(id_number)
         # return listinfodata_dict["win"]
         return listinfodata_dict
