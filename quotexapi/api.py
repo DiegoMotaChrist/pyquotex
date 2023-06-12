@@ -21,7 +21,7 @@ from pyquotex.quotexapi.ws.objects.profile import Profile
 from pyquotex.quotexapi.ws.objects.listinfodata import ListInfoData
 from pyquotex.quotexapi.ws.client import WebsocketClient
 from collections import defaultdict
-from logger import logger
+from pyquotex.logger import logger
 
 def nested_dict(n, type):
     if n == 1:
