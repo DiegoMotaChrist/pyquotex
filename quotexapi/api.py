@@ -42,11 +42,11 @@ cacert = os.environ.get('WEBSOCKET_CLIENT_CA_BUNDLE')
 class QuotexAPI(object):
     """Class for communication with Quotex API."""
     socket_option_opened = {}
-    buy_id = None
+    buy_id = {}
     trace_ws = False
     buy_expiration = None
     current_asset = None
-    buy_successful = None
+    buy_successful = {}
     account_balance = None
     account_type = None
     instruments = None
@@ -255,7 +255,7 @@ class QuotexAPI(object):
             time.sleep(0.1)
             count += 1
             if count == 50: 
-                raise Exception(f"O envio de authorization com o SSID {global_value.SSID} não retornou resultados")
+                raise Exception(f"O envio de authorization com o SSID {global_value.SSID} demorou muito pra responder")
         if not self.profile.msg:
             return False
         return True

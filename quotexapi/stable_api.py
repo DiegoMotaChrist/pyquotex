@@ -181,16 +181,17 @@ class Quotex(object):
         self.duration = duration - 1
         request_id = expiration.get_timestamp()
         self.api.current_asset = asset
-        self.api.buy_id = None
+        self.api.buy_id[asset] = None
+        self.api.buy_successful[asset] = None
         self.api.buy(price, asset, direction, duration, request_id)
-        while not self.api.buy_id:
+        while not self.api.buy_id[asset]:
             if count == 10:
                 break
             count += 1
             time.sleep(1)
         else:
             status_buy = True
-        return status_buy, self.api.buy_successful
+        return status_buy, self.api.buy_successful[asset]
 
     def sell_option(self, options_ids):
         """Sell asset Quotex"""
